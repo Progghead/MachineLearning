@@ -37,8 +37,11 @@ print(quicksort([3,6,8,10,1,2,1]))
 
 ### 数据类型基础
 
-#### 数
+</br>
 
+#### ***数***
+
+</br>
 整型与浮点型与其他语言一样  
 数据类型查询：
 
@@ -63,8 +66,10 @@ print(x)
 
 注意：python没有自加自减符号(x++, x__)  
 对于更多长整型、复杂数据类型，可参阅[文档](https://docs.python.org/3.7/library/stdtypes.html#numeric-types-int-float-long-complex)
+</br>
 
-#### 布尔运算
+#### ***布尔运算***
+
 
 python使用英语而不是符号表示布尔运算符
 
@@ -76,8 +81,9 @@ print(not f)
 print(t != f)#不等运算符
 ```
 
-#### 字符串
+#### ***字符串***
 
+</br>
 字符串的值可以使用单引号或双引号
 
 ```python
@@ -106,8 +112,10 @@ print(' world '.strip())#（去掉字符前后空格）
 ### 容器
 
 Python包括许多容器类型：列表Lists、词典Dictionaries、集Sets以及元组Tuples
+</br>
 
-#### 列表
+#### ***列表***
+
 
 python中的列表等同于数组，但是它可调整大小，并且可以包括不同类型的元素
 
@@ -128,7 +136,8 @@ print(x, xs)
 
 所有的列表操作参阅[文档](https://docs.python.org/3.7/tutorial/datastructures.html#more-on-lists)
 
-#### Slicing
+#### ***Slicing***  
+
 
 除了一次访问一个列表元素外，Python还提供了简洁的语法来访问子列表，这被称为切片
 
@@ -144,7 +153,8 @@ nums[2,4] = [8, 9] # 为子列表分配新的值
 print(nums)
 ```
 
-#### 循环
+#### ***循环***
+
 
 可以利用`for-in`循环遍历列表中的元素，缩进级别用于组织代码块  
 缩进代码是`for`循环内部的
@@ -155,9 +165,82 @@ for animal in animals:
     print(animal)
 ```
 
+
 为了访问循环体中每个元素的指数，使用内置的`enumerate`枚举函数,既有指数也有内容
 
 ```python
 animals = ['dogs', 'human', 'whales']
 for index, animal in enumerate(animals):
     print('{}. {}'.format(index + 1,animal))
+```
+
+#### 列表解析-List Comprehensions
+
+
+编程的时候，我们经常会想要把一种类型数据转换成另一种，例如下面计算一组平方数的代码  
+
+```python
+nums = [0, 1, 2, 3, 4]
+squares = []
+for x in nums:
+    squares.append(x ** 2)
+print(squares)
+```
+
+利用列表解析可以使代码更简洁
+
+```python
+nums = [0, 1, 2, 3, 4]
+squares = [x ** 2 for x in nums]
+print(squares)
+```
+
+列表解析也可以包括条件判定
+
+```python
+nums = [0, 1, 2, 3, 4]
+even_square = [x ** 2 for x in nums if x % 2 == 0]
+print(even_square)
+```
+
+#### ***Dictionaries***
+
+一个dictionary存储一对(键,值)，与javascript中的对象类似，下面是一个例子
+
+```python
+d = {'cat':'cute', 'dog':'furry'} #建立新的词典，用大括号括住
+print(d['cat']) #通过键来访问词典，得到值
+print('cat' in d) # 键值是布尔量，可以检查词典是否有所给的键
+```
+
+```python
+d['fish']='wet'
+print(d.get('monkey', 'default')) 
+#get函数负责查找键是否在字典里，如果存在就输出对应值，如果不在就输出后面默认值
+print(d.get('fish', 'N/A'))
+del d['fish']
+print(d.get('fish', 'N/A'))
+```
+在词典中迭代键很容易
+
+```python
+d = {'person': 2, 'cat': 4, 'spider': 0}
+for animal, legs in d.items():
+# dicname.items()表示词典中所有键与值,不限制格式
+    print('A {} has {} legs'. format(animal, legs))
+``` 
+
+词典解析：与列表解析类似，可以方便的创建列表，例如：
+
+```python
+nums = [0, 1, 2, 3, 4]
+even_num_to_square = {x: x ** 2 for x in nums if x % 2 ==0}
+# 从列表创建词典，加条件判定
+```
+
+词典的其他操作见[文档](https://docs.python.org/2/library/stdtypes.html#dict)
+
+
+
+
+
