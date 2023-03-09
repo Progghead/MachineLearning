@@ -70,7 +70,6 @@ print(x)
 
 #### ***布尔运算***
 
-
 python使用英语而不是符号表示布尔运算符
 
 ```python
@@ -116,11 +115,10 @@ Python包括许多容器类型：列表Lists、词典Dictionaries、集Sets以�
 
 #### ***列表***
 
-
 python中的列表等同于数组，但是它可调整大小，并且可以包括不同类型的元素
 
 ```python
-xs = [3, 1, 2]#创建列表
+xs = [3, 1, 2]#创建一个列表list
 print(xs, xs[2])
 print(xs[-1])# 负指数等同于从末尾开始数
 
@@ -138,7 +136,6 @@ print(x, xs)
 
 #### ***Slicing***  
 
-
 除了一次访问一个列表元素外，Python还提供了简洁的语法来访问子列表，这被称为切片
 
 ```python
@@ -155,7 +152,6 @@ print(nums)
 
 #### ***循环***
 
-
 可以利用`for-in`循环遍历列表中的元素，缩进级别用于组织代码块  
 缩进代码是`for`循环内部的
 
@@ -165,7 +161,6 @@ for animal in animals:
     print(animal)
 ```
 
-
 为了访问循环体中每个元素的指数，使用内置的`enumerate`枚举函数,既有指数也有内容
 
 ```python
@@ -174,8 +169,7 @@ for index, animal in enumerate(animals):
     print('{}. {}'.format(index + 1,animal))
 ```
 
-#### 列表解析-List Comprehensions
-
+#### ***列表解析-List Comprehensions***
 
 编程的时候，我们经常会想要把一种类型数据转换成另一种，例如下面计算一组平方数的代码  
 
@@ -208,7 +202,7 @@ print(even_square)
 一个dictionary存储一对(键,值)，与javascript中的对象类似，下面是一个例子
 
 ```python
-d = {'cat':'cute', 'dog':'furry'} #建立新的词典，用大括号括住
+d = {'cat':'cute', 'dog':'furry'} #创建一个词典Dictionary，用大括号括住
 print(d['cat']) #通过键来访问词典，得到值
 print('cat' in d) # 键值是布尔量，可以检查词典是否有所给的键
 ```
@@ -221,6 +215,7 @@ print(d.get('fish', 'N/A'))
 del d['fish']
 print(d.get('fish', 'N/A'))
 ```
+
 在词典中迭代键很容易
 
 ```python
@@ -228,7 +223,7 @@ d = {'person': 2, 'cat': 4, 'spider': 0}
 for animal, legs in d.items():
 # dicname.items()表示词典中所有键与值,不限制格式
     print('A {} has {} legs'. format(animal, legs))
-``` 
+```
 
 词典解析：与列表解析类似，可以方便的创建列表，例如：
 
@@ -240,7 +235,105 @@ even_num_to_square = {x: x ** 2 for x in nums if x % 2 ==0}
 
 词典的其他操作见[文档](https://docs.python.org/2/library/stdtypes.html#dict)
 
+#### ***Sets***
 
+Python中的集是不同元素的无序集合，
 
+```python
+animals = {'cats','dogs'} #创建一个集Set
+print('cats' in animals) #检查元素是否在某个集里
+print('fish' in animals)
+animals.add('fish') #在集中加入新元素
+print('fish' in animals)
+print(len(animals)) #检查元素个数
+```
 
+```python
+animals.add('cats') #在集中加入已有元素，不会改变集
+print(len(animals))
+animals.remove('cats') #在集中删除元素
+print(len(animals))
+```
+
+遍历集合的语法和遍历列表的相同，但是由于集合是无序的，你无法预知你访问集合元素的顺序
+
+```python
+animals = {'cats', 'dogs', 'fishes'}
+for idx, animal in enumerate(animals):
+    print('{}'. {}, format(idx+1, animal)) # 运行结果的编号不会按照顺序
+```
+
+集合解析：利用集合解析方便的构建集合
+
+```python
+from math import sqrt
+print({int(sqrt(x)) for x in range(30)}) 
+ #把0-30的平方根取整后加入集合，重复元素不添加
+ ```
+
+#### ***Tuples***
+
+元组是一个（不可变的）有序的值列表，它与列表最重要的区别在于
+
+1. 元组可以用作词典中的键
+2. 元组可以作为集合中的元素
+
+```python
+d = {(x, x + 1): x for x in range(10)} # 建立一个词典，其中元组作为词典的键
+t = (5, 6) # 建立一个元组Tuple
+print(type(t)) 
+print(d[t]) # 通过键查找词典的值
+print(d[(1, 2)])
+```
+
+### 函数
+
+用`def`命令定义函数
+
+```python
+def sign(x):
+    if x > 0:
+        return 'positive'
+    elif x < 0: # 用elif表示else if
+        return 'negative'
+    else
+        return 'zero'
+
+for x in [-1, 0, 1]:
+    print(sign(x))
+```
+
+如何定义函数接受可选的关键字参数
+
+```python
+def hello(name, loud=false): # loud是可选参数，如果没有则默认为假
+    if loud:
+        print('HELLO, {}', format(name.upper()))
+    else:
+        print('Hello, {}', format(name))
+```
+
+### Classes 类
+
+Python中定义类的语法很简单
+
+```python
+class Greeter:
+    # 生成器
+    def __init__(self, name): # self是参数，name是输入变量
+        self.name = name #创建一个实例变量
+
+    # 实例方法
+    def greet(self, loud = false):
+        if loud:
+            print('HELLO, {}'.format(self.name.upper()))
+        else:
+            print('Hello, {}'.format(self.name))
+
+g = Greeter('Fred') # 创建Greeter中的一个实例
+g.greet() # 调用实例方法1
+g.greet(loud = True) #调用实例方法2
+```
+
+## Numpy
 
